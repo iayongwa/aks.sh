@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Create resource group
+az group create --name e1-aks-prod-rg --location westus2
+
+# Build aks prod cluster
+az aks create \
+    --resource-group e1-aks-prod-rg \
+    --name e1-prod \
+    --node-count 1 \
+    --generate-ssh-keys
+
+# Retrieve creds
+az aks get-credentials --resource-group e1-aks-prod-rg --name e1-prod
